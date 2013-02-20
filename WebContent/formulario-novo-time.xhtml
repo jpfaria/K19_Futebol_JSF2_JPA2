@@ -1,0 +1,30 @@
+<ui:composition
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+		<h:panelGrid columns="3">
+			
+			<h:outputLabel value="#{msgs.nome}: " for="nome"/>
+			<h:inputText
+				id="nome"
+				required="true"
+				requiredMessage="#{msgs.time_valida_nome}"
+				value="#{timeBean.time.nome}"/>
+			<h:message for="nome"/>
+			
+			<h:outputLabel value="#{msgs.tecnico}: " for="tecnico"/>
+			<h:inputText
+				id="tecnico"
+				required="true"
+				requiredMessage="#{msgs.time_valida_tecnico}"
+				value="#{timeBean.time.tecnico}"/>
+			<h:message for="tecnico"/>
+			
+			<h:commandButton value="#{msgs.cadastrar}" actionListener="#{timeBean.adiciona}"/>
+			
+			
+		</h:panelGrid>
+
+</ui:composition>

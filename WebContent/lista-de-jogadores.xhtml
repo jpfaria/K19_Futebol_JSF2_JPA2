@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core">
+
+	   <h:panelGroup rendered="#{not empty jogadorBean.lista()}">
+	   		
+	   		<h2>Lista de Jogadores</h2>
+	   		
+	   		<h:dataTable
+	   			id="tabela"
+	   			value="#{jogadorBean.lista()}"
+	   			var="jogador"
+	   			styleClass="dados" rowClasses="par, impar">
+	   			
+	   			<h:column>
+	   				<f:facet name="header">
+	   					<h:outputLabel value="Id"/>
+	   				</f:facet>
+	   				#{jogador.id}
+	   			</h:column>
+	   			
+	   			<h:column>
+	   				<f:facet name="header">
+	   					<h:outputLabel value="#{msgs.nome}"/>
+	   				</f:facet>
+	   				#{jogador.nome}
+	   			</h:column>
+	   			
+	   			<h:column>
+	   				<f:facet name="header">
+	   					<h:outputLabel value="#{msgs.posicao}"/>
+	   				</f:facet>
+	   				#{jogador.posicao}
+	   			</h:column>
+	   			
+	   			<h:column>
+	   				<f:facet name="header">
+	   					<h:outputLabel value="#{msgs.dataDeNascimento}"/>
+	   				</f:facet>
+	   				<h:outputText value="#{jogador.dataDeNascimento.time}">
+	   					<f:convertDateTime pattern="dd/MM/yyyy"/>
+	   				</h:outputText>
+	   			</h:column>
+	   			
+	   			<h:column>
+	   				<f:facet name="header">
+	   					<h:outputLabel value="Time"/>
+	   				</f:facet>
+	   				#{jogador.time.nome}
+	   			</h:column>
+	   			
+	   			<h:column>
+	   				<f:facet name="header">
+						<h:outputText value="#{msgs.alterar}" />
+	   				</f:facet>
+	   
+					<h:commandButton actionListener="#{jogadorBean.altera}" value="#{msgs.alterar}">
+						<f:param name="id" value="#{jogador.id}"/>					
+					</h:commandButton>   					
+	   			
+	   			</h:column>
+	   			
+	   			<h:column>
+	   				<f:facet name="header">
+						<h:outputText value="#{msgs.remover}" />
+	   				</f:facet> 
+					<h:commandLink>
+						<f:param name="id" value="#{jogador.id}"/>
+						<f:ajax 
+							event="click"
+							execute="@this"
+							render="@form"
+							listener="#{jogadorBean.remove}" />
+						#{msgs.remover}
+					</h:commandLink>   					
+	   			</h:column>  	
+	   		
+	   		</h:dataTable>
+	   		
+	   </h:panelGroup>
+
+</ui:composition>

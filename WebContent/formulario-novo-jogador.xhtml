@@ -1,0 +1,49 @@
+<ui:composition 
+	  xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core">
+
+		<h:panelGrid columns="3">
+			
+			<h:outputLabel value="#{msgs.nome}:" for="jogador-nome"/>
+			<h:inputText
+				id="jogador-nome"
+				required="true"
+				requiredMessage="#{msgs.jogador_valida_nome}"
+				value="#{jogadorBean.jogador.nome}"/>
+			<h:message for="jogador-nome"/>
+			
+			<h:outputLabel value="#{msgs.posicao}: " for="jogador-posicao"/>
+			<h:inputText
+				id="jogador-posicao"
+				required="true"
+				requiredMessage="#{msgs.jogador_valida_posicao}"
+				value="#{jogadorBean.jogador.posicao}"/>
+			<h:message for="jogador-posicao"/>
+			
+			<h:outputLabel value="#{msgs.dataDeNascimento}: " for="jogador-nascimento"/>
+			<h:inputText
+				id="jogador-nascimento"
+				required="true"
+				requiredMessage="#{msgs.jogador_valida_dataDeNascimento}"
+				value="#{jogadorBean.jogador.dataDeNascimento.time}">
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:inputText>
+			<h:message for="jogador-nascimento"/>
+			
+			<h:outputLabel value="#{msgs.time}: " for="jogador-time"/>
+			<h:selectOneMenu id="jogador-time" value="#{jogadorBean.jogador.time.id}">
+				<f:selectItems
+					value="#{timeBean.lista()}"
+					var="time"
+					itemLabel="#{time.nome}"
+					itemValue="#{time.id}" />
+			</h:selectOneMenu>
+			<h:message for="jogador-time"/>
+			
+			<h:commandButton value="#{msgs.cadastrar}" styleClass="botao-formulario" actionListener="#{jogadorBean.adiciona}"/>
+				
+		</h:panelGrid>   
+   
+</ui:composition>

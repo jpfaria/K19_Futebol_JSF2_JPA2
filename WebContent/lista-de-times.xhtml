@@ -1,0 +1,70 @@
+<ui:composition
+	  xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core">
+
+	   <h:panelGroup id="lista_times" rendered="#{not empty timeBean.lista()}">
+	   
+	   		<h2>Lista de Times</h2>
+	   		
+	   		<h:dataTable
+	   			id="tabela"
+	   			value="#{timeBean.lista()}"
+	   			var="time"
+	   			styleClass="dados"
+	   			rowClasses="par, impar">
+	   			
+	   			<h:column>
+	   				<f:facet name="header">
+						<h:outputText value="Id" />
+	   				</f:facet>
+	   				#{time.id}
+	   			</h:column>
+	   			
+	   			<h:column>
+	   				<f:facet name="header">
+						<h:outputText value="Nome" />
+	   				</f:facet>
+	   				#{time.nome}
+	   			</h:column>
+	   			
+	   			<h:column>
+	   				<f:facet name="header">
+						<h:outputText value="#{msgs.tecnico}" />
+	   				</f:facet>
+	   				#{time.tecnico}
+	   			</h:column>
+	   			
+	   			<h:column>
+	   				<f:facet name="header">
+						<h:outputText value="#{msgs.alterar}" />
+	   				</f:facet>	   		
+					<h:commandButton value="Alterar" actionListener="#{timeBean.altera}" >
+						<f:param name="id" value="#{time.id}"/>											
+					</h:commandButton>
+								
+	   			</h:column>
+	   			
+	   			<h:column>
+	   				<f:facet name="header">
+						<h:outputText value="#{msgs.remover}" />
+	   				</f:facet>
+	   				
+					<h:commandLink>
+						<f:param name="id" value="#{time.id}"/>	
+						<f:ajax 
+							event="click"
+							execute="@this"
+							listener="#{timeBean.remove}"
+							render="@form" />
+						Remover				
+					</h:commandLink>   					
+	   				
+	   			</h:column>  			
+	   			
+	   		</h:dataTable>
+	   
+	   </h:panelGroup>
+	   
+</ui:composition>
